@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="Localhost">
+  <database-model serializer="dbm" dbms="MONGO" family-id="MONGO" format-version="4.20">
+    <root id="1">
+      <ServerVersion>4.4.4</ServerVersion>
+    </root>
+    <schema id="2" parent="1" name="CN"/>
+    <schema id="3" parent="1" name="ComputerNetwork">
+      <Current>1</Current>
+    </schema>
+    <schema id="4" parent="1" name="DataEngineer"/>
+    <schema id="5" parent="1" name="Practice"/>
+    <schema id="6" parent="1" name="admin"/>
+    <schema id="7" parent="1" name="config"/>
+    <schema id="8" parent="1" name="local"/>
+    <table id="9" parent="3" name="Member"/>
+    <table id="10" parent="3" name="Menu"/>
+    <table id="11" parent="3" name="Port"/>
+    <table id="12" parent="3" name="Request_logs"/>
+    <column id="13" parent="9" name="_id">
+      <DataType>ObjectId(0)|12s</DataType>
+    </column>
+    <column id="14" parent="9" name="name">
+      <DataType>String(0)|12s</DataType>
+    </column>
+    <column id="15" parent="9" name="password">
+      <DataType>String(0)|12s</DataType>
+    </column>
+    <column id="16" parent="9" name="username">
+      <DataType>String(0)|12s</DataType>
+    </column>
+    <column id="17" parent="10" name="_id">
+      <DataType>String(0)|12s</DataType>
+    </column>
+    <column id="18" parent="10" name="name_en">
+      <DataType>String(0)|12s</DataType>
+    </column>
+    <column id="19" parent="10" name="price">
+      <DataType>Integer|4s</DataType>
+    </column>
+    <column id="20" parent="10" name="name_th">
+      <Position>1</Position>
+      <DataType>String(0)|12s</DataType>
+    </column>
+    <column id="21" parent="11" name="_id">
+      <DataType>String(0)|12s</DataType>
+    </column>
+    <column id="22" parent="11" name="port">
+      <DataType>Double(0)|8s</DataType>
+    </column>
+  </database-model>
+</dataSource>
