@@ -2,8 +2,6 @@
 import pymongo
 import pickle
 import os
-from socket import socket
-from tabulate import tabulate
 
 
 # Connect Database
