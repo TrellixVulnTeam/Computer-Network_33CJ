@@ -1,5 +1,5 @@
 
-from sys import exit
+from function.member import line_break
 
 options_text = """
 Select options
@@ -12,26 +12,22 @@ Select options
 
 def options():
     while True:
-        print(option_text, end="")
+        print(options_text, end="")
         option_ = input("Select option: ").upper()
         if option_ == 'M':
             print("Ying")
 
         elif option_ == 'C':
-            print("Ying")
+            print("Pond")
             pass
         elif option_ == 'H':
-            print("Ying")
+            print("Tong")
             pass
         elif option_ == 'E':
-            print("Ying")
+            line_break("Thank you, have a nice day")
             break
 
     return "Options: " + option_
 
 
 options()
-
-
-
-
