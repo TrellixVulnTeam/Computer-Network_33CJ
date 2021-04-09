@@ -17,10 +17,10 @@ def options():
 
         elif menu_option == 'C':
             print("Pond")
-            pass
+
         elif menu_option == 'H':
             print("Tong")
-            pass
+
         elif menu_option == 'E':
             break
 
