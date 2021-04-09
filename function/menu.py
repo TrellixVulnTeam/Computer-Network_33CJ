@@ -64,21 +64,43 @@ def delete_menu(select_menu):
                                                         .set_index("ID")
     print(tabulate(df, headers="keys", tablefmt="grid"))
 
-    del_menu = input("ป้อนรหัสรายการที่ต้องการลบ: ")
-    amount = int(input("จำนวนที่ต้องการลบ : "))
+    # for key,value in select_menu.items():
+    #     print(f"\t{key} : {value}")
 
-    if amount < select_menu[del_menu]:
-        select_menu[del_menu] -= amount
+    del_menu = input("ป้อนรหัสรายการที่ต้องการลบ: ").upper()
+    try:
+        for key, value in select_menu.items():
+            print(select_menu)
+            if del_menu != key:
+                clear_output()
+                line_break = "=====" * 10
+                print(f"""
+                            {line_break}
+                            Invalid value : Please your option Again!!
+                            {line_break}\n""")
+            else:
+                value = int(input("จำนวนที่ต้องการลบ : "))
 
-    elif select_menu[del_menu] == amount:
-        print(select_menu)
-        select_menu.pop(del_menu, None)
+                if value > select_menu[del_menu]:
+                    line_break = "=====" * 10
+                    print(f"""
+                                {line_break}
+                                Invalid value : Please enter your value Again!!
+                                {line_break}\n""")
 
-    print("Please Correct")
-    print(select_menu)
+                elif value < select_menu[del_menu]:
+                    select_menu[del_menu] -= value
+
+                elif select_menu[del_menu] == value:
+                    print(select_menu, del_menu)
+                    select_menu.pop(del_menu, None)
 
 
-def menu():
+    except RuntimeError:
+        pass
+
+
+def menu(select_menu = {}):
 
     # mongodb+srv://admin:admin ~
     query = {"name_th": {
@@ -101,7 +123,7 @@ def menu():
         pages = [rows[x:x+size] for x in range(0, len(rows), size)]
 
         page_index = 0
-        select_menu = {}
+
         while True:
             print(tabulate(pages[page_index], headers, tablefmt="grid"))
             if select_menu:
@@ -121,7 +143,6 @@ def menu():
                 select = input("Enter Food ID: ")
                 if not db.Menu.find_one({"_id": select.upper()}):
                     clear_output()
-
                     line_break = "=====" * 10
                     print(f"""
                                 {line_break}
@@ -130,11 +151,12 @@ def menu():
                     sleep(4)
                 else:
                     tmp = db.Menu.find_one({"_id": select.upper()})["_id"]
-                    print(tmp)
+                    print(select)
                     try:
                         select_menu[tmp] += 1
                     except KeyError:
                         select_menu[tmp] = 1
+
             elif select.lower() == 'd' and select_menu:
                 _ = system('cls')
                 clear_output()
@@ -155,7 +177,6 @@ def menu():
 
             else:
                 line_break = "=====" * 10
-                print("else")
                 print(f"""
                 {line_break}
                 Incorrect options: Please enter your option Again!!
@@ -166,6 +187,7 @@ def menu():
         dict_of_menus(select_menu)
 
     table_menu_pages(data)
+
 
 
 menu()
