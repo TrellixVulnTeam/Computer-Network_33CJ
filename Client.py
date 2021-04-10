@@ -47,6 +47,7 @@ try:
                 print("Client Exception")
                 if server_data.decode().upper() == "EXIT":
                     print("Exception Exit")
+
                     s.send('exit'.encode())
                     break
                 else:
