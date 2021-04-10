@@ -14,6 +14,7 @@ try:
         s.connect(
             (host, port)
         )
+
     except ConnectionRefusedError as con:
         line_break("Server was closed.")
         exit()
@@ -29,6 +30,7 @@ try:
             }
         ))
         user = data['params'][0]
+
     else:
         user = data['params']
         s.send("exit".encode())
@@ -68,4 +70,6 @@ try:
 
 except ConnectionResetError:
     line_break("Server has been shutdown!!")
+
+
 
