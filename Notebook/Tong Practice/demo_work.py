@@ -12,7 +12,7 @@ s.bind((host,port))
 s.listen()
 
 while True:
-    c, addr = accept()
+    c, addr = s.accept()
     print('Connection From : ',addr)
 
 
