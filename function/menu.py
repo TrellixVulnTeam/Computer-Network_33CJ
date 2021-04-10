@@ -64,9 +64,6 @@ def delete_menu(select_menu):
                                                         .set_index("ID")
     print(tabulate(df, headers="keys", tablefmt="grid"))
 
-    # for key,value in select_menu.items():
-    #     print(f"\t{key} : {value}")
-
     del_menu = input("ป้อนรหัสรายการที่ต้องการลบ: ").upper()
     try:
         for key, value in select_menu.items():
@@ -187,7 +184,6 @@ def menu(select_menu = {}):
         dict_of_menus(select_menu)
 
     table_menu_pages(data)
-
 
 
 menu()
