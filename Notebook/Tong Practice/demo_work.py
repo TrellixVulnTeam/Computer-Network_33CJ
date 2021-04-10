@@ -2,6 +2,7 @@ from socket import(
     socket,
     gethostname
 )
+from pickle import dumps, loads
 
 s = socket()
 host = gethostname()
@@ -11,8 +12,10 @@ port = 9999
 s.bind((host,port))
 s.listen()
 
+
 while True:
-    c, addr = accept()
+    c, addr = s.accept()
     print('Connection From : ',addr)
+    c.send(dumps('Hi I am groot'))
 
 
