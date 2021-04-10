@@ -5,10 +5,12 @@ from time import sleep
 from os import system
 from tabulate import tabulate
 from menu import menu
-
 from IPython.display import clear_output
+from pickle import load
+from pymongo import MongoClient
 
-client = pymongo.MongoClient("mongodb+srv://admin:admin@computernetwork.e5eod.mongodb.net/ComputerNetwork?authSource=admin&replicaSet=atlas-129xya-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true")
+path = load(open('Data/mongo.p', 'rb'))
+client = MongoClient(path['server'])
 db = client.ComputerNetwork
 
 # Pymongo

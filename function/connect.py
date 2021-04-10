@@ -7,7 +7,7 @@ import os
 def connect_mongo_db():
     try:
         path = load(open('Data/mongo.p', 'rb'))
-        client = MongoClient(path['local'])
+        client = MongoClient(path['server'])
         return client.ComputerNetwork
     except FileNotFoundError as f:
         print("This:", os.getcwd())
