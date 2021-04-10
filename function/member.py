@@ -7,7 +7,7 @@ import os
 # Connect Database
 try:
     mongo = pickle.load(open("Data/mongo.p", 'rb'))
-    client = pymongo.MongoClient(mongo['local'])
+    client = pymongo.MongoClient(mongo['server'])
     db = client.ComputerNetwork
 except FileNotFoundError as f:
     print(os.listdir())
