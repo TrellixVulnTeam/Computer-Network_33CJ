@@ -8,8 +8,14 @@ def connect_mongo_db():
     try:
         path = load(open('Data/mongo.p', 'rb'))
         client = MongoClient(path['server'])
+
         return client.ComputerNetwork
     except FileNotFoundError as f:
+        path = load(open('Data/mongo.p', 'rb'))
+        client = MongoClient(path['server'])
+        print(f'''path : {path}
+Client : {client}
+Collection : {client.ComputerNetwork}''')
         print("This:", os.getcwd())
 
 
@@ -30,7 +36,8 @@ def ask_port():
 
 
 def check_port():
-    return db.Port.find_one({"port": int(input("Enter special port: "))})
+    db = connect_mongo_db()
+    return db.Port.find_one({"port": (input("Enter special port: "))})
 
 
-db = connect_mongo_db()
+
