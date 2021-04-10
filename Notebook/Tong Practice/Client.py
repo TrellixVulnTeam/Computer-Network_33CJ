@@ -7,7 +7,7 @@ from function.member import line_break
 
 s = socket()
 host = gethostname()
-port = ask_port()
+port = ask_port(True)
 
 try:
     try:
@@ -20,53 +20,61 @@ try:
         exit()
 
     server_data = s.recv(1024)
-    data = loads(server_data)()
-    if data['function'] == 'register':
-        print("Params:", data)
-        s.send(dumps(
-            {
-                "function": 'register',
-                "params": data['params']
-            }
-        ))
-        user = data['params'][0]
-
+    if not port == 1234:
+        data = loads(server_data)
     else:
-        user = data['params']
-        s.send("exit".encode())
+        data = loads(server_data)()
 
-    print("Login:", user)
-    while True:
-        server_data = s.recv(1024)
+    try:
+        if data['function'] == 'register':
+            print("Params:", data)
+            s.send(dumps(
+                {
+                    "function": 'register',
+                    "params": data['params']
+                }
+            ))
+            user = data['params'][0]
 
-        if hasattr(server_data, "decode"):
-            try:
-                tmp = loads(server_data)
-                tmp("Create user complete!!")
-                break
+        else:
+            user = data['params']
+            s.send("exit".encode())
 
-            except UnpicklingError as e:
-                print("Client Exception")
+        print("Login:", user)
+        while True:
+            server_data = s.recv(1024)
+
+            if hasattr(server_data, "decode"):
+                try:
+                    tmp = loads(server_data)
+                    tmp("Create user complete!!")
+                    break
+
+                except UnpicklingError as e:
+                    print("Client Exception")
+                    if server_data.decode().upper() == "EXIT":
+                        print("Exception Exit")
+
+                        s.send('exit'.encode())
+                        break
+                    else:
+                        print("Exception Not Exit")
+                        print(server_data.decode())
+
+            else:
+                print("Else")
                 if server_data.decode().upper() == "EXIT":
-                    print("Exception Exit")
-
+                    print("Else if in")
                     s.send('exit'.encode())
                     break
                 else:
-                    print("Exception Not Exit")
                     print(server_data.decode())
+        s.close()
 
-        else:
-            print("Else")
-            if server_data.decode().upper() == "EXIT":
-                print("Else if in")
-                s.send('exit'.encode())
-                break
-            else:
-                print(server_data.decode())
-
-
-    s.close()
+    except TypeError:
+        print("Special Port")
+        data = loads(server_data)
+        print(data)
 
 except ConnectionResetError:
     line_break("Server has been shutdown!!")
