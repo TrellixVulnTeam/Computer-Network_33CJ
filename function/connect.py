@@ -4,28 +4,22 @@ from function.member import line_break
 import os
 
 
-def connect_mongo_db(tong=False):
+def connect_mongo_db():
     try:
-        if not tong:
-            path = load(open('Data/mongo.p', 'rb'))
-        else:
-            path = load(open('../../Data/mongo.p', 'rb'))
+        path = load(open('Data/mongo.p', 'rb'))
         client = MongoClient(path['server'])
         return client.ComputerNetwork
 
     except FileNotFoundError as f:
-        print("This:", os.getcwd())
+        print("[Not Found] This:", os.getcwd())
 
 
-def ask_port(tong=False):
+def ask_port():
     select = input("คุณต้องการเชื่อมต่อผ่าน Port พิเศษ? [Y]Yes / [Any]No: ")
     if select.upper() == 'Y':
         try:
             while True:
-                if not tong:
-                    port = check_port()
-                else:
-                    port = check_port(True)
+                port = check_port()
                 if port:
                     break
                 line_break("ไม่พบเลข Port ดังกล่าว")
@@ -36,12 +30,6 @@ def ask_port(tong=False):
     return 1234
 
 
-def check_port(tong=False):
-    if not tong:
-        db = connect_mongo_db()
-    else:
-        db = connect_mongo_db(True)
+def check_port():
+    db = connect_mongo_db()
     return db.Port.find_one({"port": int(input("Enter special port: "))})
-
-
-print("Show to Mint")
