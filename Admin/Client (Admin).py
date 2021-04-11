@@ -1,70 +1,21 @@
+from socket import (
+    gethostname
+)
+import socket
 
-from socket import socket, gethostname
-from pickle import dumps, loads
-from pickle import UnpicklingError
-from function.connect import ask_port
-from function.member import line_break
-
-s = socket()
 host = gethostname()
-port = ask_port()
+port = 7777
 
-try:
-    try:
-        s.connect(
-            (host, port)
-        )
-    except ConnectionRefusedError as con:
-        line_break("Server was closed.")
-        exit()
+s = socket.socket(socket.AF_INET , socket.SOCK_STREAM)
 
-    server_data = s.recv(1024)
-    data = loads(server_data)()
-    if data['function'] == 'register':
-        print("Params:", data)
-        s.send(dumps(
-            {
-                "function": 'register',
-                "params": data['params']
-            }
-        ))
-        user = data['params'][0]
-    else:
-        user = data['params']
-        s.send("exit".encode())
+s.connect((host,port))
 
-    print("Login:", user)
-    while True:
-        server_data = s.recv(1024)
+s.send(b'Hello Server')
 
-        if hasattr(server_data, "decode"):
-            try:
-                tmp = loads(server_data)
-                tmp("Create user complete!!")
-                break
+data = s.recv(1024)
+print('Received : ',repr(data))
 
-            except UnpicklingError as e:
-                print("Client Exception")
-                if server_data.decode().upper() == "EXIT":
-                    print("Exception Exit")
 
-                    s.send('exit'.encode())
-                    break
-                else:
-                    print("Exception Not Exit")
-                    print(server_data.decode())
 
-        else:
-            print("Else")
-            if server_data.decode().upper() == "EXIT":
-                print("Else if in")
-                s.send('exit'.encode())
-                break
-            else:
-                print(server_data.decode())
 
-    s.close()
-
-except ConnectionResetError:
-    line_break("Server has been shutdown!!")
 
