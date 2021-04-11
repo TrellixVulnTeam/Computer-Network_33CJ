@@ -63,7 +63,6 @@ try:
             else:
                 print(server_data.decode())
 
-
     s.close()
 
 except ConnectionResetError:
