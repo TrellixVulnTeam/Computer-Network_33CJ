@@ -5,13 +5,8 @@ import os
 
 
 def connect_mongo_db():
-    try:
-        path = load(open('Data/mongo.p', 'rb'))
-        client = MongoClient(path['server'])
-        return client.ComputerNetwork
-
-    except FileNotFoundError as f:
-        print("[Not Found] This:", os.getcwd())
+    client = MongoClient("mongodb+srv://admin:admin@computernetwork.e5eod.mongodb.net/ComputerNetwork?authSource=admin&replicaSet=atlas-129xya-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true")
+    return client.ComputerNetwork
 
 
 def ask_port():

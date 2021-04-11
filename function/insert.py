@@ -2,14 +2,8 @@
 from pickle import load
 from pymongo import MongoClient
 
-path = load(open('Data/mongo.p', 'rb'))
-client = MongoClient(path['server'])
+client = MongoClient("mongodb+srv://admin:admin@computernetwork.e5eod.mongodb.net/ComputerNetwork?authSource=admin&replicaSet=atlas-129xya-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true")
 db = client.ComputerNetwork
 
 # Pymongo
 print(db.Request_logs.find_one())
-
-# db.Port.insert_one({
-#     "_id": "tong",
-#     "port": 9999
-# })

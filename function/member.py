@@ -5,12 +5,9 @@ import os
 
 
 # Connect Database
-try:
-    mongo = pickle.load(open("Data/mongo.p", 'rb'))
-    client = pymongo.MongoClient(mongo['server'])
-    db = client.ComputerNetwork
-except FileNotFoundError as f:
-    print(os.listdir())
+client = pymongo.MongoClient("mongodb+srv://admin:admin@computernetwork.e5eod.mongodb.net/ComputerNetwork?authSource=admin&replicaSet=atlas-129xya-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true")
+db = client.ComputerNetwork
+
 
 
 """
@@ -78,8 +75,8 @@ def register(username, name, password):
     
     
 def line_break(text):
-    line_break = "=====" * 10
+    line_break_ = "=====" * 10
     print(f"""
-    {line_break}
+    {line_break_}
     {text}
-    {line_break}\n\n""")
+    {line_break_}\n\n""")
