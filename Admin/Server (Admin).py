@@ -13,7 +13,7 @@ s.bind((host, port))
 s.listen()
 
 print("Tong")
-print("Test Tong")
+print("Mob")
 
 while True:
     c, addr = s.accept()
