@@ -33,5 +33,3 @@ def ask_port(special=False):
 def check_port(input_data="1234"):
     db = connect_mongo_db()
     return db.Port.find_one({"port": input_data})
-
-print("Port:", ask_port(True))
