@@ -12,6 +12,8 @@ port = 7777
 s.bind((host, port))
 s.listen()
 
+print("Tong")
+
 while True:
     c, addr = s.accept()
     print('Connection from :', addr)
