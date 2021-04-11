@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from member import line_break
+from function.member import line_break
 from IPython.display import clear_output
 from os import system
 from time import sleep
