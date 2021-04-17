@@ -52,7 +52,7 @@ def workflow(s):
                 return 'break'
 
             elif command == "OPTION":
-                options()
+                options(user)
 
             else:
                 print("Exception Not Exit")

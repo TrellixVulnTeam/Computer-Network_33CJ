@@ -17,7 +17,7 @@ Select options
 """
 
 
-def options():
+def options(user=None):
     select_food = None
     while True:
         sleep(2)
@@ -38,7 +38,7 @@ def options():
 
         elif menu_option == 'H':
             print("Tong")
-            history()
+            history(user)
 
         elif menu_option == 'E':
             break

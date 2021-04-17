@@ -2,5 +2,5 @@
 # Import
 
 # Main
-def history():
+def history(user=None):
     pass
