@@ -64,10 +64,9 @@ def delete_menu(select_menu):
                                                         .set_index("ID")
     print(tabulate(df, headers="keys", tablefmt="grid"))
 
-    del_menu = input("ป้อนรหัสรายการที่ต้องการลบ: ").upper()
+    del_menu = input("Enter Food ID you want to delete: ").upper()
     try:
         for key, value in select_menu.items():
-            print(select_menu)
             if del_menu != key:
                 clear_output()
                 line_break = "=====" * 10
@@ -76,7 +75,7 @@ def delete_menu(select_menu):
                             Invalid value : Please your option Again!!
                             {line_break}\n""")
             else:
-                value = int(input("จำนวนที่ต้องการลบ : "))
+                value = int(input("Enter amount: "))
 
                 if value > select_menu[del_menu]:
                     line_break = "=====" * 10
@@ -118,7 +117,6 @@ def menu(select_menu = {}):
         headers = data[0].keys()
         rows = [x.values() for x in data]
         pages = [rows[x:x+size] for x in range(0, len(rows), size)]
-
         page_index = 0
 
         while True:
@@ -147,12 +145,13 @@ def menu(select_menu = {}):
                                 {line_break}\n""")
                     sleep(4)
                 else:
+                    n_select = int(input("Enter amount: "))
                     tmp = db.Menu.find_one({"_id": select.upper()})["_id"]
-                    print(select)
                     try:
-                        select_menu[tmp] += 1
+                        select_menu[tmp] += n_select
                     except KeyError:
-                        select_menu[tmp] = 1
+                        select_menu[tmp] = n_select
+
 
             elif select.lower() == 'd' and select_menu:
                 _ = system('cls')
