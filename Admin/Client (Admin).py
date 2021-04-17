@@ -19,6 +19,14 @@ s.send(pickle.dumps('Hello Server'))
 data = s.recv(1024)
 print('Received : ',pickle.loads(data))
 
+# user = 'tong'
+# H = True
+# if user == H :
+#     db.find
+#
+#
+#
+# else :
 
 
 
