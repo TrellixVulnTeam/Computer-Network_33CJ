@@ -30,11 +30,9 @@ def options(user=None):
 
         elif menu_option == 'C':
             print("Pond")
-            if not select_food:
-                line_break("Sorry, Please select food first!!")
-            else:
-                print(select_food)
-                insert_menu(select_food)
+            confirm = insert_menu(user, select_food)
+            if confirm:
+                select_food = None
 
         elif menu_option == 'H':
             print("Tong")

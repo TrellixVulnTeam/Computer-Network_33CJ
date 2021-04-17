@@ -2,7 +2,7 @@
 <dataSource name="Server">
   <database-model serializer="dbm" dbms="MONGO" family-id="MONGO" format-version="4.21">
     <root id="1">
-      <ServerVersion>4.4.4</ServerVersion>
+      <ServerVersion>4.4.5</ServerVersion>
     </root>
     <schema id="2" parent="1" name="ComputerNetwork">
       <Current>1</Current>
@@ -10,85 +10,5 @@
     <schema id="3" parent="1" name="Tong"/>
     <schema id="4" parent="1" name="admin"/>
     <schema id="5" parent="1" name="local"/>
-    <table id="6" parent="2" name="Member"/>
-    <table id="7" parent="2" name="Menu"/>
-    <table id="8" parent="2" name="Port"/>
-    <table id="9" parent="2" name="Request_logs"/>
-    <column id="10" parent="6" name="_id">
-      <Position>1</Position>
-      <DataType>ObjectId|12s</DataType>
-    </column>
-    <column id="11" parent="6" name="name">
-      <Position>1</Position>
-      <DataType>String|12s</DataType>
-    </column>
-    <column id="12" parent="6" name="password">
-      <Position>1</Position>
-      <DataType>String|12s</DataType>
-    </column>
-    <column id="13" parent="6" name="username">
-      <Position>1</Position>
-      <DataType>String|12s</DataType>
-    </column>
-    <column id="14" parent="7" name="_id">
-      <Position>1</Position>
-      <DataType>String|12s</DataType>
-    </column>
-    <column id="15" parent="7" name="name_en">
-      <Position>1</Position>
-      <DataType>String|12s</DataType>
-    </column>
-    <column id="16" parent="7" name="price">
-      <Position>1</Position>
-      <DataType>Int32|4s</DataType>
-    </column>
-    <column id="17" parent="7" name="name_th">
-      <Position>2</Position>
-      <DataType>String|12s</DataType>
-    </column>
-    <column id="18" parent="8" name="_id">
-      <Position>1</Position>
-      <DataType>String|12s</DataType>
-    </column>
-    <column id="19" parent="8" name="port">
-      <Position>1</Position>
-      <DataType>String|12s</DataType>
-    </column>
-    <column id="20" parent="9" name="_id">
-      <Position>1</Position>
-      <DataType>ObjectId|12s</DataType>
-    </column>
-    <column id="21" parent="9" name="create_date">
-      <Position>1</Position>
-      <DataType>ISODate|91s</DataType>
-    </column>
-    <column id="22" parent="9" name="status">
-      <Position>1</Position>
-      <DataType>Int32|4s</DataType>
-    </column>
-    <column id="23" parent="9" name="food_detail">
-      <Position>2</Position>
-      <DataType>Object|4999544s</DataType>
-    </column>
-    <column id="24" parent="9" name="username">
-      <Position>2</Position>
-      <DataType>String|12s</DataType>
-    </column>
-    <column id="25" parent="9" name="food_detail.F001">
-      <Position>3</Position>
-      <DataType>Int32|4s</DataType>
-    </column>
-    <column id="26" parent="9" name="food_detail.F002">
-      <Position>4</Position>
-      <DataType>Int32|4s</DataType>
-    </column>
-    <column id="27" parent="9" name="food_detail.F003">
-      <Position>5</Position>
-      <DataType>Int32|4s</DataType>
-    </column>
-    <column id="28" parent="9" name="food_detail.F004">
-      <Position>6</Position>
-      <DataType>Int32|4s</DataType>
-    </column>
   </database-model>
 </dataSource>
