@@ -180,9 +180,10 @@ def menu(select_menu = {}):
                 _ = system('cls')
                 clear_output()
 
-        dict_of_menus(select_menu)
+        # dict_of_menus(select_menu)
 
     table_menu_pages(data)
+    return select_menu
 
 
-menu()
+# menu()

@@ -4,6 +4,7 @@ from pickle import dumps, loads
 from pickle import UnpicklingError
 from function.connect import ask_port
 from function.member import line_break
+from function.options import options
 
 
 def connect(s):
@@ -41,12 +42,15 @@ def workflow(s):
         except UnpicklingError as e:
             print("Client Exception")
             command = server_data.decode().upper()
+
             if command == "EXIT":
                 print("Exception Exit")
                 s.send('exit'.encode())
                 return 'break'
+
             elif command == "OPTION":
-                print("Option")
+                options()
+
             else:
                 print("Exception Not Exit")
                 print(server_data.decode())
@@ -67,10 +71,10 @@ try:
             break
         else:
             print("Special case")
-            break
+            s.send("exit".encode())
 
 except ConnectionResetError:
-    line_break("Server has been shutdown!!")
+    line_break("You have lost connection from server!!")
 
 except ConnectionRefusedError:
     line_break("Server was closed.")

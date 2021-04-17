@@ -33,11 +33,13 @@ def server_command(c, addr):
                 except UnpicklingError:
                     print("except else:")
                     command = client_data.decode().upper()
-                    if  command == 'EXIT':
+
+                    if command == 'EXIT':
                         c.send("exit".encode())
                         line_break(f"Client {addr[0]}:{addr[1]} has been disconnect!!")
                         c.close()
                         break
+
                     elif command == 'OPTION':
                         c.send('option'.encode())
 
