@@ -5,22 +5,18 @@ from pickle import UnpicklingError
 from function.connect import ask_port
 from function.member import line_break
 
-s = socket()
-host = gethostname()
-port = ask_port()
 
-try:
-    try:
-        s.connect(
-            (host, port)
-        )
-    except ConnectionRefusedError as con:
-        line_break("Server was closed.")
-        exit()
+def connect(s):
+    s.connect(
+        (host, port)
+    )
 
+
+def login(s):
     server_data = s.recv(1024)
     data = loads(server_data)()
-    if data['function'] == 'register':
+    func = data['function']
+    if func == 'register':
         print("Params:", data)
         s.send(dumps(
             {
@@ -28,43 +24,57 @@ try:
                 "params": data['params']
             }
         ))
-        user = data['params'][0]
+        return data['params'][0]
     else:
-        user = data['params']
-        s.send("exit".encode())
+        return data['params']
+
+
+def workflow(s):
+    s.send("option".encode())
+    server_data = s.recv(1024)
+    if hasattr(server_data, "decode"):
+        try:
+            tmp = loads(server_data)
+            tmp("Create user complete!!")
+            return 'break'
+
+        except UnpicklingError as e:
+            print("Client Exception")
+            command = server_data.decode().upper()
+            if command == "EXIT":
+                print("Exception Exit")
+                s.send('exit'.encode())
+                return 'break'
+            elif command == "OPTION":
+                print("Option")
+            else:
+                print("Exception Not Exit")
+                print(server_data.decode())
+
+
+s = socket()
+host = gethostname()
+port = ask_port()
+
+try:
+    connect(s)
+    user = login(s)
 
     print("Login:", user)
     while True:
-        server_data = s.recv(1024)
-
-        if hasattr(server_data, "decode"):
-            try:
-                tmp = loads(server_data)
-                tmp("Create user complete!!")
-                break
-
-            except UnpicklingError as e:
-                print("Client Exception")
-                if server_data.decode().upper() == "EXIT":
-                    print("Exception Exit")
-
-                    s.send('exit'.encode())
-                    break
-                else:
-                    print("Exception Not Exit")
-                    print(server_data.decode())
-
+        status = workflow(s)
+        if status == 'break':
+            break
         else:
-            print("Else")
-            if server_data.decode().upper() == "EXIT":
-                print("Else if in")
-                s.send('exit'.encode())
-                break
-            else:
-                print(server_data.decode())
-
-    s.close()
+            print("Special case")
+            break
 
 except ConnectionResetError:
     line_break("Server has been shutdown!!")
+
+except ConnectionRefusedError:
+    line_break("Server was closed.")
+
+except EOFError:
+    line_break("Server not sending anything!!")
 

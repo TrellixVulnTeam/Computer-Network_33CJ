@@ -18,6 +18,7 @@ def server_command(c, addr):
             sleep(2)
             client_data = c.recv(1024)
             if hasattr(client_data, "decode"):
+                print("pass")
                 try:
                     print("pickle")
                     tmp = loads(client_data)
@@ -28,28 +29,32 @@ def server_command(c, addr):
                             dumps(line_break)
                         )
                         register(user, name, password)
+
                 except UnpicklingError:
                     print("except else:")
-                    if client_data.upper() == 'EXIT':
-                        print("Ex else in")
+                    command = client_data.decode().upper()
+                    if  command == 'EXIT':
+                        c.send("exit".encode())
+                        line_break(f"Client {addr[0]}:{addr[1]} has been disconnect!!")
                         c.close()
                         break
-                    print("Ex after loop to")
+                    elif command == 'OPTION':
+                        c.send('option'.encode())
 
             else:
                 print("Special case")
 
-            c.send("exit".encode())
-
     except UnicodeDecodeError:
-        # print("Unit code error :", client_data)
         print("Unit code error :")
 
-    except ConnectionAbortedError:
-        line_break(f"Client {addr[0]}:{addr[1]} has been disconnect!!")
+    except ConnectionAbortedError as con:
+        print(con)
         
     except ConnectionResetError:
         line_break(f"Client {addr[0]}:{addr[1]} has been shutdown!!")
+
+    except EOFError:
+        line_break(f"Client not sending anything!!")
 
 
 s = socket()

@@ -25,6 +25,3 @@ def options():
             break
 
     return "Options: " + menu_option
-
-
-options()
