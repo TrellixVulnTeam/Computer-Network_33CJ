@@ -1,5 +1,9 @@
 
+from os import system
+from time import sleep
+
 from function.menu import menu
+from function.history import history
 from function.member import line_break
 from function.insert import insert_menu
 
@@ -16,6 +20,8 @@ Select options
 def options():
     select_food = None
     while True:
+        sleep(2)
+        system("cls")
         print(options_text, end="")
         menu_option = input("Select option: ").upper()
         if menu_option == 'M':
@@ -31,7 +37,8 @@ def options():
                 insert_menu(select_food)
 
         elif menu_option == 'H':
-            print("Mob")
+            print("Tong")
+            history()
 
         elif menu_option == 'E':
             break

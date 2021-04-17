@@ -1,10 +1,13 @@
 
+from os import system
+from time import sleep
+
 from socket import socket, gethostname
-from pickle import dumps, loads
-from pickle import UnpicklingError
+from pickle import dumps, loads, UnpicklingError
+
+from function.options import options
 from function.connect import ask_port
 from function.member import line_break
-from function.options import options
 
 
 def connect(s):
@@ -74,7 +77,11 @@ try:
             s.send("exit".encode())
 
 except ConnectionResetError:
-    line_break("You have lost connection from server!!")
+    line_break("Exiting...")
+    sleep(2)
+    system("cls")
+    line_break("Thank you!!")
+
 
 except ConnectionRefusedError:
     line_break("Server was closed.")

@@ -10,11 +10,10 @@
 import pymongo
 import pickle
 import pandas as pd
+
 from time import sleep
 from os import system
 from tabulate import tabulate
-
-from IPython.display import clear_output
 
 client = pymongo.MongoClient("mongodb+srv://admin:admin@computernetwork.e5eod.mongodb.net/ComputerNetwork?authSource=admin&replicaSet=atlas-129xya-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true")
 db = client.ComputerNetwork
@@ -68,7 +67,8 @@ def delete_menu(select_menu):
     try:
         for key, value in select_menu.items():
             if del_menu != key:
-                clear_output()
+                system("cls")
+                print("!=", key)
                 line_break = "=====" * 10
                 print(f"""
                             {line_break}
@@ -83,6 +83,8 @@ def delete_menu(select_menu):
                                 {line_break}
                                 Invalid value : Please enter your value Again!!
                                 {line_break}\n""")
+                    sleep(2)
+                    system("cls")
 
                 elif value < select_menu[del_menu]:
                     select_menu[del_menu] -= value
@@ -91,8 +93,8 @@ def delete_menu(select_menu):
                     print(select_menu, del_menu)
                     select_menu.pop(del_menu, None)
 
-
     except RuntimeError:
+        print("Runtime Error")
         pass
 
 
@@ -137,7 +139,7 @@ def menu(select_menu = {}):
             if select.lower() == 's':
                 select = input("Enter Food ID: ")
                 if not db.Menu.find_one({"_id": select.upper()}):
-                    clear_output()
+                    system("cls")
                     line_break = "=====" * 10
                     print(f"""
                                 {line_break}
@@ -152,21 +154,20 @@ def menu(select_menu = {}):
                     except KeyError:
                         select_menu[tmp] = n_select
 
+                    system("cls")
 
             elif select.lower() == 'd' and select_menu:
-                _ = system('cls')
-                clear_output()
+                system("cls")
                 delete_menu(select_menu)
+                system("cls")
 
             elif select.lower() == 'n' and page_index < (len(pages)-1):
-                _ = system('cls')
-                clear_output()
                 page_index += 1
+                system('cls')
 
             elif select.lower() == 'p' and page_index != 0:
-                _ = system('cls')
-                clear_output()
                 page_index -= 1
+                system('cls')
 
             elif select.lower() == 'e':
                 break
@@ -178,7 +179,6 @@ def menu(select_menu = {}):
                 Incorrect options: Please enter your option Again!!
                 {line_break}\n""", end="\r")
                 _ = system('cls')
-                clear_output()
 
         # dict_of_menus(select_menu)
 
