@@ -9,11 +9,13 @@ from function.insert import insert_menu
 
 
 options_text = """
-Select options
-[M] Menu
-[C] Confirm
-[H] History
-[E] Exit
+    Select options:
+    
+    [M] Menu
+    [C] Confirm
+    [H] History
+    [E] Exit
+    
 """
 
 
@@ -22,9 +24,11 @@ def options(user=None):
     while True:
         sleep(2)
         system("cls")
+        print("\n   Welcome:", user)
         print(options_text, end="")
-        menu_option = input("Select option: ").upper()
+        menu_option = input("   Select option: ").upper()
         if menu_option == 'M':
+            print()
             select_food = menu()
 
         elif menu_option == 'C':
@@ -37,5 +41,10 @@ def options(user=None):
 
         elif menu_option == 'E':
             break
+
+        else:
+            line_break(
+                "Please, select the correct option!!"
+            )
 
     return "Options: " + menu_option
