@@ -18,9 +18,7 @@ def server_command(c, addr):
             sleep(2)
             client_data = c.recv(1024)
             if hasattr(client_data, "decode"):
-                print("pass")
                 try:
-                    print("pickle")
                     tmp = loads(client_data)
 
                     if tmp["function"] == "register":
@@ -31,7 +29,6 @@ def server_command(c, addr):
                         register(user, name, password)
 
                 except UnpicklingError:
-                    print("except else:")
                     command = client_data.decode().upper()
 
                     if command == 'EXIT':
