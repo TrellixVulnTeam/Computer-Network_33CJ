@@ -21,7 +21,6 @@ def login(s):
     data = loads(server_data)()
     func = data['function']
     if func == 'register':
-        print("Params:", data)
         s.send(dumps(
             {
                 "function": 'register',
@@ -43,11 +42,9 @@ def workflow(s):
             return 'break'
 
         except UnpicklingError as e:
-            print("Client Exception")
             command = server_data.decode().upper()
 
             if command == "EXIT":
-                print("Exception Exit")
                 s.send('exit'.encode())
                 return 'break'
 
@@ -55,7 +52,6 @@ def workflow(s):
                 options(user)
 
             else:
-                print("Exception Not Exit")
                 print(server_data.decode())
 
 
@@ -64,16 +60,15 @@ host = gethostname()
 port = ask_port()
 
 try:
+    system("cls")
     connect(s)
     user = login(s)
 
-    print("Login:", user)
     while True:
         status = workflow(s)
         if status == 'break':
             break
         else:
-            print("Special case")
             s.send("exit".encode())
 
 except ConnectionResetError:
