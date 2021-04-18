@@ -25,17 +25,14 @@ def options(user=None):
         print(options_text, end="")
         menu_option = input("Select option: ").upper()
         if menu_option == 'M':
-            print("Ying")
             select_food = menu()
 
         elif menu_option == 'C':
-            print("Pond")
             confirm = insert_menu(user, select_food)
             if confirm:
                 select_food = None
 
         elif menu_option == 'H':
-            print("Tong")
             history(user)
 
         elif menu_option == 'E':
