@@ -39,7 +39,8 @@ def workflow(s):
         try:
             tmp = loads(server_data)
             tmp("Create user complete!!")
-            return 'break'
+            sleep(2)
+            options(user)
 
         except UnpicklingError as e:
             command = server_data.decode().upper()
@@ -49,7 +50,10 @@ def workflow(s):
                 return 'break'
 
             elif command == "OPTION":
+                system("cls")
+                line_break("Welcome to food delivery!!")
                 options(user)
+                exit()
 
             else:
                 print(server_data.decode())

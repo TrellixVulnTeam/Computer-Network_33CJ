@@ -95,7 +95,6 @@ def delete_menu(select_menu):
 
     except RuntimeError:
         print("Runtime Error")
-        pass
 
 
 def menu(select_menu = {}):
@@ -182,7 +181,12 @@ def menu(select_menu = {}):
 
         # dict_of_menus(select_menu)
 
-    table_menu_pages(data)
+    try:
+        table_menu_pages(data)
+    except IndexError:
+        print("ไม่พบรายการอาหาร")
+        select_menu = menu()
+
     return select_menu
 
 
