@@ -13,7 +13,6 @@ from function.connect import connect_mongo_db
 
 def insert_login_logs(user):
     db = connect_mongo_db()
-    status = True
     db.Connection_logs.insert_one({
         "username": user,
         "login_at": datetime.now(),
