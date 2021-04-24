@@ -1,13 +1,8 @@
 
-from os import system
-from time import sleep
-
 from socket import socket, gethostname
-from pickle import dumps, loads, UnpicklingError
 
-from function.options import options
 from function.connect import ask_port
-from function.member import line_break
+from function.client_function import *
 
 
 def connect(s):
@@ -16,60 +11,19 @@ def connect(s):
     )
 
 
-def login(s):
-    server_data = s.recv(1024)
-    data = loads(server_data)()
-    func = data['function']
-    if func == 'register':
-        s.send(dumps(
-            {
-                "function": 'register',
-                "params": data['params']
-            }
-        ))
-        return data['params'][0]
-    else:
-        return data['params']
-
-
-def workflow(s):
-    s.send("option".encode())
-    server_data = s.recv(1024)
-    if hasattr(server_data, "decode"):
-        try:
-            tmp = loads(server_data)
-            tmp("Create user complete!!")
-            sleep(2)
-            options(user)
-
-        except UnpicklingError as e:
-            command = server_data.decode().upper()
-
-            if command == "EXIT":
-                s.send('exit'.encode())
-                return 'break'
-
-            elif command == "OPTION":
-                system("cls")
-                line_break("Welcome to food delivery!!")
-                options(user)
-                exit()
-
-            else:
-                print(server_data.decode())
-
-
 s = socket()
 host = gethostname()
 port = ask_port()
+login_status = False
 
 try:
     system("cls")
     connect(s)
     user = login(s)
+    login_status = insert_login_logs(user)
 
     while True:
-        status = workflow(s)
+        status = workflow(s, user)
         if status == 'break':
             break
         else:
@@ -87,4 +41,8 @@ except ConnectionRefusedError:
 
 except EOFError:
     line_break("Server not sending anything!!")
+
+finally:
+    if login_status:
+        update_logout_logs(user)
 
