@@ -40,6 +40,10 @@ def options(user=None):
             history(user)
 
         elif menu_option == 'E':
+            line_break("Exiting...")
+            sleep(2)
+            system("cls")
+            line_break("Thank you!!")
             break
 
         else:
